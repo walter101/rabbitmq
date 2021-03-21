@@ -27,7 +27,28 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Service\WorkerSender:
+        class: App\Service\WorkerSender
+        arguments:
+            - '@rabbitmqAmqpStreamConnection'
 
+    App\Service\WorkerReciever:
+        class: App\Service\WorkerReciever
+        arguments:
+            - '@rabbitmqAmqpStreamConnection'
+
+    App\Service\WorkerRecieverFanout:
+        class: App\Service\WorkerRecieverFanout
+        arguments:
+            - '@rabbitmqAmqpStreamConnection'
+
+    rabbitmqAmqpStreamConnection:
+        class: PhpAmqpLib\Connection\AMQPStreamConnection
+        arguments:
+            - '%rabbitmq.host%'
+            - '%rabbitmq.port%'
+            - '%rabbitmq.user%'
+            - '%rabbitmq.pass%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

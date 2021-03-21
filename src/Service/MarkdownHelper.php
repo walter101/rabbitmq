@@ -7,6 +7,7 @@ namespace App\Service;
 use Michelf\MarkdownInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Security\Core\Security;
 
 class MarkdownHelper
 {
@@ -19,17 +20,22 @@ class MarkdownHelper
 
     /** @var LoggerInterface $logger */
     private $logger;
+    /**
+     * @var Security
+     */
+    private $security;
 
     /**
      * MarkdownHelper constructor.
      * @param MarkdownInterface $markdown
      * @param AdapterInterface $cache
      */
-    public function __construct(MarkdownInterface $markdown, AdapterInterface $cache, LoggerInterface $markdownLogger)
+    public function __construct(MarkdownInterface $markdown, AdapterInterface $cache, LoggerInterface $markdownLogger, Security $security)
     {
         $this->markdown = $markdown;
         $this->cache = $cache;
         $this->logger = $markdownLogger;
+        $this->security = $security;
     }
 
     /**
@@ -52,7 +58,9 @@ class MarkdownHelper
             $item->set($this->markdown->transform($articleContent));
             $this->cache->save($item);
 
-            $this->logger->info('Saved article in the cache using key: '. $item->getKey());
+            $this->logger->info('Saved article in the cache using key: '. $item->getKey(), [
+                'user' => $this->security->getUser()
+            ]);
         } else {
             $this->logger->info('Fetched article from the cache using key: markdown'.md5($articleContent));
         }

@@ -1,0 +1,8 @@
+services:
+  rabbitmq:
+    class: PhpAmqpLib\Connection\AMQPStreamConnection
+    arguments:
+      - '%rabbitmq.host%'
+      - '%rabbitmq.port%'
+      - '%rabbitmq.user%'
+      - '%rabbitmq.pass%'

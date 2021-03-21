@@ -11,29 +11,35 @@ use Doctrine\ORM\EntityManagerInterface;
 use Nexy\Slack\Client;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ * Class ArticleController
+ */
 class ArticleController extends AbstractController
 {
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $isDebug;
-    /**
-     * @var EntityManagerInterface
-     */
+
+    /** @var EntityManagerInterface */
     private $entityManager;
 
-    /**
-     * @var LoggerInterface
-     */
+    /** @var LoggerInterface */
     private $logger;
 
+    /**
+     * ArticleController constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param LoggerInterface $logger
+     * @param bool $isDebug
+     */
     public function __construct(EntityManagerInterface $entityManager,LoggerInterface $logger, bool $isDebug)
     {
         $this->isDebug = $isDebug;
@@ -42,7 +48,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="app_homepage")
      * @return Response
      */
     public function homepage(ArticleRepository $articleRepository)
@@ -77,8 +83,6 @@ labore minim pork belly spare ribs cupim short loin in. Elit exercitation eiusmo
 turkey shank eu *pork* belly meatball non cupim. jammy    
 EOF;
 
-
-
         $articleContent = $markdown->parse($article->getContent());
 
         return $this->render('article/show.html.twig',
@@ -109,5 +113,14 @@ EOF;
 
         $this->logger->info('Article is being hearted');
         return new JsonResponse(['hearts' => $article->getHeartCount()]);
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/admin/article/new", name="admin_article_new")
+     */
+    public function new()
+    {
+        die('to do');
     }
 }

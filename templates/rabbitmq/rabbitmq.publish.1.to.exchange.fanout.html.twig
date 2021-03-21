@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+
+            <!-- Article List -->
+
+            <div class="col-sm-12 col-md-8">
+                <div>
+                    Published one to the exchange type=fanout
+                </div>
+            </div>
+
+            <!-- Right bar ad space -->
+
+
+            <div class="col-sm-12 col-md-4 " style="text-align: left;">
+                <div class="ad-space mx-auto mt-1 pb-2 pt-2" style="padding: 3px;">
+                    <h6>1 message publised to the DLX queue</h6>
+                    <div>
+                        To process the message use the command:
+                    </div>
+                    <div>
+                        bin/console processDLXEmailMessage
+                    </div>
+                </div>
+
+{#                <div class="quote-space pb-2 pt-2 px-5">#}
+{#                    &nbsp;#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}

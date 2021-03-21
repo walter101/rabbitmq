@@ -1,0 +1,5 @@
+parameters:
+  rabbitmq.host: host.docker.internal:5672
+  rabbitmq.port: 5672
+  rabbitmq.user: guest
+  rabbitmq.pass: guest

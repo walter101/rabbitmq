@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}"  />
+
+{%  endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row user-menu-container square">
+        <div class="col-md-12 user-details">
+            <div class="row overview">
+                <div class="col-md-8 user-pad text-center">
+                    <form class="form-signin" method="post">
+                        <div class="row">
+                            {%  if registrationstate is defined %}
+                                <div class="col-sm-12">
+                                    <h1 class="h3 mb-3 font-weight-normal">Registratie succevol!</h1>
+                                </div>
+                            {% else %}
+                                <div class="col-sm-12">
+                                    <h1 class="h3 mb-3 font-weight-normal">Registreren</h1>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputFirstname" class="">Voornaam</label>
+                                    <input type="text" name="firstname" id="inputFirstname" class="form-control" placeholder="Voornaam" value="" required>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputLastname" class="">Achternaam</label>
+                                    <input type="text" name="lastname" id="inputLastname" class="form-control" placeholder="Achternaam" value="" required>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputStreetname" class="">Straat</label>
+                                    <input type="text" name="streetname" id="inputstreetname" class="form-control" placeholder="Straat" value="" required>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputStreetNumber" class="">Huisnummer</label>
+                                    <input type="text" name="streetnumber" id="inputStreetNumber" class="form-control" placeholder="Huisnummer" value="" required>
+                                </div>
+                                <div class="col-sm-12 text-left">
+                                    <label for="inputZipcode" class="">Postcode</label>
+                                    <input type="text" name="zipcode" id="inputZipcode" class="form-control" placeholder="Postcode" value="" maxlength="6" required>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputEmail" class="">Email</label>
+                                    <input type="text" name="email" id="inputEmail" class="form-control" placeholder="email" value="" required>
+                                </div>
+                                <div class="col-sm-6 text-left">
+                                    <label for="inputPassword" class="">wachtwoord</label>
+                                    <input type="text" name="password" id="inputPassword" class="form-control" placeholder="wachtwoord" value="" required>
+                                </div>
+
+                                <div class="col-sm-12">&nbsp;</div>
+
+                                <div class="col-sm-12">
+                                    <input type="hidden" name="submitcheckpersonaldetail" value="submitted" />
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('loginform') }}">
+                                    <button class="btn btn-lg btn-primary" type="submit" value="Opslaan" >Registreer</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </form>
+{% endblock %}

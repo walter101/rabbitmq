@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+
+            <!-- Article List -->
+
+            <div class="col-sm-12 col-md-8">
+                <div>
+                    Published 1 <b>processor</b> message(s) to the ProcessorMessage queue
+                </div>
+            </div>
+
+            <!-- Right bar ad space -->
+
+
+            <div class="col-sm-12 col-md-4 " style="text-align: left;">
+                <div class="ad-space mx-auto mt-1 pb-2 pt-2" style="padding: 3px;">
+                    <h6>5 message publised to the queue</h6>
+                    <div>
+                        To process the message(s) use the command:
+                    </div>
+                    <div>
+                        bin/console processEmailMessage
+                    </div>
+                </div>
+
+{#                <div class="quote-space pb-2 pt-2 px-5">#}
+{#                    &nbsp;#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
